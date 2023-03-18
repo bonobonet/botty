@@ -14,3 +14,4 @@ botty-test-*
 *.o
 *.obj
 *.lst
+dub.selections.json
