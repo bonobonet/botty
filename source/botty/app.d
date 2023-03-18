@@ -1,3 +1,5 @@
+module botty.app;
+
 import std.stdio;
 import birchwood;
 
