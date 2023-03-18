@@ -1,0 +1,16 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/botty
+botty.so
+botty.dylib
+botty.dll
+botty.a
+botty.lib
+botty-test-*
+*.exe
+*.pdb
+*.o
+*.obj
+*.lst
