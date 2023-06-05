@@ -8,4 +8,9 @@ public class Bot : Client
     {
         super(info);
     }
+
+    public override void onChannelMessage(Message fullMessage, string channel, string msgBody)
+    {
+        // TODO: Implement me
+    }
 }
