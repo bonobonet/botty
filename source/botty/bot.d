@@ -49,6 +49,7 @@ public class Bot : Client
 
         string command = stuff[1];
 
+        // TODO: Make nicer, let it also search the `getAreas()`
         if(command == "eskont")
         {
             import eskomcalendar;
