@@ -62,7 +62,7 @@ public class Bot : Client
             Schedule[] schedules = calendar.getSchedules(area);
             foreach(Schedule schedule; schedules)
             {
-                message = bold("From")~" "~italics(to!(string)(schedule.getStart())~" "~bold("Till")~" "~italics(to!(string)(schedule.getFinish())));
+                message = bold("From")~" "~italics(to!(string)(schedule.getStart()))~" "~bold("Till")~" "~italics(to!(string)(schedule.getFinish()));
                 channelMessage(message, channel);
 
             }
