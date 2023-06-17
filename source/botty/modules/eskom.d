@@ -50,6 +50,12 @@ public class EskomCalendarAPI : Mod
         {
             getBot().channelMessage("Invalid command for Eskom Calendar", channel);
         }
+        /**
+         * Searching for areas
+         *
+         * Usage: `.eskom areas` (for all areas)
+         *        `.eskom areas 500-510` (all areas from 500 to 509)
+         */
         else if(command == "areas")
         {
             // TODO: Look for optional range
@@ -58,6 +64,7 @@ public class EskomCalendarAPI : Mod
 
             int begin = -1, end = -1;
 
+            // Range-based search
             if(splits.length == 3)
             {
                 // Extract the range as n-m format
@@ -85,6 +92,7 @@ public class EskomCalendarAPI : Mod
                 }
             }
 
+            // If a range was specified
             if(begin != -1 && end != -1)
             {
                 for(int idx = begin; idx < end && idx < areas.length; idx++)
@@ -94,6 +102,7 @@ public class EskomCalendarAPI : Mod
                     getBot().channelMessage(curArea, channel);
                 }
             }
+            // If a range was not specified (list all of them)
             else
             {
                 // TODO: Spruce the layout up with text formatting
