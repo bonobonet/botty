@@ -25,5 +25,20 @@ public class Ping : Mod
     public override void react(Message fullMessage, string channel, string messageBody)
     {
         // TODO: Implement me
+        import std.string : split, strip;
+        string[] splits = split(strip(messageBody), " ");
+
+        if(splits.length == 2)
+        {
+            // Resolve the domain (TODO: Add this)
+            string domain = splits[1];
+
+            import std.stdio : writeln;
+            writeln("ping: domain is: '"~domain~"'");
+        }
+        else
+        {
+            // TODO: This is an error - too many commands
+        }
     }
 }
