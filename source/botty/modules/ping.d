@@ -29,7 +29,7 @@ public class Ping : Mod
 
         if(splits.length == 2)
         {
-            // Resolve the domain (TODO: Add this)
+            // Grab the domain
             string domain = splits[1];
 
             import std.stdio : writeln;
