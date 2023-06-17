@@ -11,7 +11,7 @@ import botty.bot : Bot;
 import birchwood.protocol.messages : Message;
 import eskomcalendar;
 
-public class EskomCalendarAPI : Mod
+public final class EskomCalendarAPI : Mod
 {
     private static string commandStr = ".eskom";
     private EskomCalendar calendar;
