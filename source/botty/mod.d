@@ -19,7 +19,12 @@ public abstract class Mod
         this.bot = bot;
     }
 
-    public final Bot getBot()
+    /** 
+     * Returns the `Bot` instance associated with this module
+     *
+     * Returns: the associated `Bot`
+     */
+    protected final Bot getBot()
     {
         return bot;
     }
