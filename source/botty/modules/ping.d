@@ -7,7 +7,7 @@ import botty.mod;
 import botty.bot : Bot;
 import birchwood.protocol.messages : Message;
 
-public class Ping : Mod
+public final class Ping : Mod
 {
     private static string commandStr = ".ping";
 
@@ -73,8 +73,6 @@ public class Ping : Mod
                     writeln(str);
                     getBot().channelMessage(str, channel);
                 }
-
-                
             }
             catch(StdioException e)
             {
@@ -84,7 +82,6 @@ public class Ping : Mod
             {
                 writeln(e);
             }
-            
         }
         else
         {
