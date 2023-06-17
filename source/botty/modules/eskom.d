@@ -14,10 +14,14 @@ import eskomcalendar;
 public class EskomCalendarAPI : Mod
 {
     private static string commandStr = ".eskom";
+    private EskomCalendar calendar;
 
     this(Bot bot)
     {
         super(bot);
+
+        // INitialize a new EskomCalendar provider
+        this.calendar = new EskomCalendar();
     }
 
     public override bool accepts(Message fullMessage, string channel, string messageBody)
@@ -46,13 +50,19 @@ public class EskomCalendarAPI : Mod
         {
             getBot().channelMessage("Invalid command for Eskom Calendar", channel);
         }
-        else
+        else if(command == "areas")
         {
+            // TODO: Look for optional range
+            // TODO: Do fuzzy search?
+            string[] areas = calendar.getAreas();
 
+            // TODO: Spruce the layout up with text formatting
+            foreach(string area; areas)
+            {
+                getBot().channelMessage(area, channel);
+            }
         }
        
         writeln("Eskom command: '"~command~"'");
-
-        // getBot().channelMessage(funniedText, channel);
     }
 }
