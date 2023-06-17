@@ -7,8 +7,10 @@ import std.exception : ErrnoException;
 import std.json : parseJSON, JSONValue, JSONException;
 import core.stdc.stdlib : exit;
 
-void main()
+void main(string[] args)
 {
+	// TODO: Read path from args and if not present
+	// ... then default to `config.json`
 	string configPath = "config.json";
 	Config config;
 
