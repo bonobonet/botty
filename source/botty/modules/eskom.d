@@ -56,6 +56,35 @@ public class EskomCalendarAPI : Mod
             // TODO: Do fuzzy search?
             string[] areas = calendar.getAreas();
 
+            int begin = -1, end = -1;
+
+            if(splits.length == 2)
+            {
+                // Extract the range as n-m format
+                string rangeInput = splits[2];
+                string[] rangeElements = split(rangeInput, "-");
+
+                if(rangeElements.length == 2)
+                {
+                    import std.conv : to, ConvException;
+                    try
+                    {
+                        begin = to!(int)(rangeElements[0]);
+                        end = to!(int)(rangeElements[1]);
+                    }
+                    catch(ConvException e)
+                    {
+                        getBot().channelMessage("Invalid range elements '"~rangeInput~"'", channel);
+                        return;    
+                    }
+                }
+                else
+                {
+                    getBot().channelMessage("Invalid range '"~rangeInput~"'", channel);
+                    return;
+                }
+            }
+
             // TODO: Spruce the layout up with text formatting
             foreach(string area; areas)
             {
