@@ -58,7 +58,7 @@ public class EskomCalendarAPI : Mod
 
             int begin = -1, end = -1;
 
-            if(splits.length == 2)
+            if(splits.length == 3)
             {
                 // Extract the range as n-m format
                 string rangeInput = splits[2];
@@ -85,11 +85,25 @@ public class EskomCalendarAPI : Mod
                 }
             }
 
-            // TODO: Spruce the layout up with text formatting
-            foreach(string area; areas)
+            if(begin != -1 && end != -1)
             {
-                getBot().channelMessage(area, channel);
+                for(int idx = begin; idx < end && idx < areas.length; idx++)
+                {
+                    string curArea = areas[idx];
+                    // TODO: Spruce the layout up with text formatting
+                    getBot().channelMessage(curArea, channel);
+                }
             }
+            else
+            {
+                // TODO: Spruce the layout up with text formatting
+                foreach(string area; areas)
+                {
+                    getBot().channelMessage(area, channel);
+                }
+            }
+
+            // TODO: Do this with just one set of loop code
         }
        
         writeln("Eskom command: '"~command~"'");
