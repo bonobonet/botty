@@ -13,9 +13,9 @@ public class DeavmiComedy : Mod
 
     public override bool accepts(Message fullMessage, string channel, string messageBody)
     {
-        import std.string;
+        import std.string : startsWith;
 
-        import std.stdio;
+        import std.stdio : writeln;
         writeln("Yesh");
         
         if(messageBody.startsWith(".deavmicomedy"))
@@ -28,8 +28,22 @@ public class DeavmiComedy : Mod
         }
     }
 
+    private static string commandStr = ".deavmicomedy";
+
     public override void react(Message fullMessage, string channel, string messageBody)
     {
-        getBot().channelMessage("comedy", channel);
+        import std.string : indexOf;
+
+        // Guaranteed to not be -1 as `accepts()` wouldn't have passed then
+        long funnyIdx = indexOf(messageBody, commandStr);
+        string toBeFunnied = messageBody[funnyIdx+commandStr.length..$];
+
+        // Apply the comedy (courtesy of @rany2's original Botty code)
+        import std.regex : regex, replaceAll;
+        string ranyRegex = r"\x1f|\x01|\x02|\x12|\x0f|\x1d|\x16|\x0f(?:\d{1,2}(?:,\d{1,2})?)?|\x03(?:\d{1,2}(?:,\d{1,2})?)?";
+        auto replacementRegex = regex(ranyRegex);
+        string funniedText = replaceAll(toBeFunnied, replacementRegex, "");
+
+        getBot().channelMessage(funniedText, channel);
     }
 }
