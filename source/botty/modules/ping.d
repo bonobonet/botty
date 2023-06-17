@@ -39,6 +39,7 @@ public class Ping : Mod
         else
         {
             // TODO: This is an error - too many commands
+            getBot().channelMessage("A domain or address is required for the ping (no more than that and no less)", channel);
         }
     }
 }
