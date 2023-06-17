@@ -36,6 +36,39 @@ public class Ping : Mod
             writeln("ping: domain is: '"~domain~"'");
 
             // TODO: Implement me
+            import std.process;
+            import std.stdio : File;
+
+            import std.stdio : StdioException;
+
+            try
+            {
+                ProcessPipes pipes = pipeProcess(["/usr/bin/ping", "-c", "4", "-i", "0.2", domain]);
+
+                File stdout = pipes.stdout();
+                pipes.pid();
+
+                // Skips the nine lines
+                for(int i = 0; i < 8; i++)
+                {
+                    stdout.readln();
+                }
+
+                string str = strip(stdout.readln(), "\n");
+                
+                writeln(str);
+
+                getBot().channelMessage(str, channel);
+            }
+            catch(StdioException e)
+            {
+                writeln(e);
+            }
+            catch(ProcessException e)
+            {
+                writeln(e);
+            }
+            
         }
         else
         {
