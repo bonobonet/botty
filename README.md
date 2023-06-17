@@ -5,7 +5,7 @@ botty
 
 IRC bot for the BonoboNET IRC network
 
-## Credfits
+## Credits
 
 * [rany2](https://github.com/rany2)
     * Implementing the `rot13` module
