@@ -4,7 +4,7 @@ import botty.mod;
 import botty.bot : Bot;
 import birchwood.protocol.messages : Message;
 
-public class DeavmiComedy : Mod
+public final class DeavmiComedy : Mod
 {
     this(Bot bot)
     {
