@@ -44,8 +44,25 @@ void main(string[] args)
 
 struct Config
 {
+	/** 
+	 * Server's address
+	 */
 	string serverAddr;
+
+	/** 
+	 * Server's port
+	 */
 	int serverPort;
+
+	/** 
+	 * Nickname to use
+	 */
+	string nickname;
+
+	/** 
+	 * Channels to join (in CSV format (for now))
+	 */
+	string channels;
 }
 
 Config getConfig(string configPath)
