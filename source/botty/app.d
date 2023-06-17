@@ -6,6 +6,7 @@ import botty.bot : Bot;
 import std.exception : ErrnoException;
 import std.json : parseJSON, JSONValue, JSONException;
 import core.stdc.stdlib : exit;
+import std.string : split;
 
 void main(string[] args)
 {
@@ -36,7 +37,10 @@ void main(string[] args)
 	// // Set the fakelag to 1 second
 	// connInfo.setFakeLag(1);
 	
-	Bot botty = new Bot(connInfo);
+	// Extract the channels to connect to
+	string[] channels = split(config.channels, ",");
+
+	Bot botty = new Bot(connInfo, channels);
 
 	// Start the bot
 	botty.start();
