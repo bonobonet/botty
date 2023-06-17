@@ -47,8 +47,8 @@ public final class Rot13 : Mod
     {
         import std.algorithm : map;
         import std.conv : to;
-        
-        return to!(string)(toBeSecretified.map!((ch) {
+
+        return to!(string)(text.map!((ch) {
                     if (ch >= 'a' && ch <= 'z')
                         ch = (ch - 'a' + 13) % 26 + 'a';
                     if (ch >= 'A' && ch <= 'Z')
