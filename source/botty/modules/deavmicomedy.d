@@ -24,6 +24,7 @@ public class DeavmiComedy : Mod
         }
         else
         {
+            writeln("YYEYYKKK");
             return false;
         }
     }
@@ -33,6 +34,9 @@ public class DeavmiComedy : Mod
     public override void react(Message fullMessage, string channel, string messageBody)
     {
         import std.string : indexOf, strip;
+
+        import std.stdio;
+        writeln("comedic");
 
         // Guaranteed to not be -1 as `accepts()` wouldn't have passed then
         long funnyIdx = indexOf(messageBody, commandStr);
