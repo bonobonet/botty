@@ -26,9 +26,11 @@ public class Bot : Client
     {
         import botty.modules.deavmicomedy : DeavmiComedy;
         import botty.modules.eskom : EskomCalendarAPI;
+        import botty.modules.ping : Ping;
         modules ~= [
                         new DeavmiComedy(this),
-                        new EskomCalendarAPI(this)
+                        new EskomCalendarAPI(this),
+                        new Ping(this)
                     ];
     }
 
@@ -54,7 +56,7 @@ public class Bot : Client
         // fullMessage.getFrom
         // channelMessage("Yes I received '"~msgBody~"' BOI!", "#general");
         
-        reactCommand(fullMessage, channel, msgBody);
+        // reactCommand(fullMessage, channel, msgBody);
         modulePass(fullMessage, channel, msgBody);
     }
 
@@ -74,7 +76,8 @@ public class Bot : Client
         }
     }
 
-    public void reactCommand(Message fullMessage, string channel, string msgBody)
+    // TODO: Remove this, not used anymore (rather modulePass() is used)
+    private void reactCommand(Message fullMessage, string channel, string msgBody)
     {
         fullMessage.getFrom();
 
