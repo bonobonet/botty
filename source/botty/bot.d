@@ -25,7 +25,11 @@ public class Bot : Client
     private void addTestModules()
     {
         import botty.modules.deavmicomedy : DeavmiComedy;
-        modules ~= [new DeavmiComedy(this)];
+        import botty.modules.eskom : EskomCalendarAPI;
+        modules ~= [
+                        new DeavmiComedy(this),
+                        new EskomCalendarAPI(this)
+                    ];
     }
 
     /** 
