@@ -1,9 +1,15 @@
+/** 
+ * Rot13 module
+ */
 module botty.modules.rot13;
 
 import botty.mod;
 import botty.bot : Bot;
 import birchwood.protocol.messages : Message;
 
+/** 
+ * Rot 13 command
+ */
 public final class Rot13 : Mod
 {
     private static string commandStr = ".rot13";
