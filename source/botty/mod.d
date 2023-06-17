@@ -13,7 +13,19 @@ import birchwood.protocol.messages : Message;
  */
 public abstract class Mod
 {
+    /** 
+     * The `Bot` associated with this module instance
+     */
     private Bot bot;
+
+    /** 
+     * Creates a new `Mod`-ule with the associated bot
+     * such that one can get access to facilities for
+     * sending messages
+     *
+     * Params:
+     *   bot = the `Bot` to associate with this instance
+     */
     this(Bot bot)
     {
         this.bot = bot;
