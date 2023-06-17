@@ -40,9 +40,13 @@ public class DeavmiComedy : Mod
 
         // Apply the comedy (courtesy of @rany2's original Botty code)
         import std.regex : regex, replaceAll;
-        string ranyRegex = r"\x1f|\x01|\x02|\x12|\x0f|\x1d|\x16|\x0f(?:\d{1,2}(?:,\d{1,2})?)?|\x03(?:\d{1,2}(?:,\d{1,2})?)?";
+        string ranyRegex = `\x1f|\x01|\x02|\x12|\x0f|\x1d|\x16|\x0f(?:\d{1,2}(?:,\d{1,2})?)?|\x03(?:\d{1,2}(?:,\d{1,2})?)?`;
         auto replacementRegex = regex(ranyRegex);
-        string funniedText = replaceAll(toBeFunnied, replacementRegex, "");
+        
+        import std.stdio;
+        writeln(replacementRegex);
+
+        string funniedText = replaceAll(toBeFunnied, replacementRegex, "$&");
 
         getBot().channelMessage(funniedText, channel);
     }
