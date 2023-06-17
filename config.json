@@ -2,5 +2,5 @@
 	"serverAddr": "rany.irc.bnet.eu.org",
 	"serverPort": 6667,
 	"nickname": "bottyng",
-	"channels": "#general,#tlang"
+	"channels": "#bot,#tlang"
 }
