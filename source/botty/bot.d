@@ -3,12 +3,16 @@ module botty.bot;
 import birchwood;
 import lumars;
 import std.conv : to;
+import core.thread : Thread, dur;
 
 public class Bot : Client
 {
-    this(ConnectionInfo info)
+    private string[] channels;
+
+    this(ConnectionInfo info, string[] channels)
     {
         super(info);
+        this.channels = channels;
     }
 
     /** 
@@ -21,9 +25,10 @@ public class Bot : Client
     	connect();
 
         // Wait a little then try join (TODO: Should we not detect this in birchwood perhaps)
-        // TODO: Join channels listed in configuration
-        joinChannel("#general");
+        Thread.sleep(dur!("seconds")(2));
 
+        // Join channels requested
+        joinChannel(channels);
     }
 
     public override void onChannelMessage(Message fullMessage, string channel, string msgBody)
