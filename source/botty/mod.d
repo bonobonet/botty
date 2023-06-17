@@ -1,3 +1,7 @@
+/** 
+ * Base definitions from which can be used
+ * to derive one's own Botty modules
+ */
 module botty.mod;
 
 import botty.bot : Bot;
