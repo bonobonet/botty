@@ -1,12 +1,13 @@
 module botty.app;
 
-import std.stdio;
+import std.stdio : writeln;
 import birchwood;
 import botty.bot : Bot;
 import std.exception : ErrnoException;
-import std.json : parseJSON, JSONValue, JSONException;
 import core.stdc.stdlib : exit;
 import std.string : split;
+import botty.config;
+import std.json : JSONException;
 
 void main(string[] args)
 {
@@ -44,45 +45,4 @@ void main(string[] args)
 
 	// Start the bot
 	botty.start();
-}
-
-struct Config
-{
-	/** 
-	 * Server's address
-	 */
-	string serverAddr;
-
-	/** 
-	 * Server's port
-	 */
-	int serverPort;
-
-	/** 
-	 * Nickname to use
-	 */
-	string nickname;
-
-	/** 
-	 * Channels to join (in CSV format (for now))
-	 */
-	string channels;
-}
-
-Config getConfig(string configPath)
-{
-	File configFile;
-	configFile.open(configPath);
-
-	ubyte[] data;
-	data.length = configFile.size();
-	configFile.rawRead(data);
-	configFile.close();
-
-	import jstruct;
-
-	JSONValue json = parseJSON(cast(string)data);
-	Config config = fromJSON!(Config)(json);
-
-	return config;
 }
