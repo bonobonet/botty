@@ -45,20 +45,36 @@ public class Ping : Mod
             {
                 ProcessPipes pipes = pipeProcess(["/usr/bin/ping", "-c", "4", "-i", "0.2", domain]);
 
-                File stdout = pipes.stdout();
-                pipes.pid();
+                // Wait for the process to finish
+                Pid pid = pipes.pid();
+                int exitCode = wait(pid);
 
-                // Skips the nine lines
-                for(int i = 0; i < 8; i++)
+                // On clean exit
+                if(exitCode == 0)
                 {
-                    stdout.readln();
+                    File stdout = pipes.stdout();
+
+                    // Skips the nine lines
+                    for(int i = 0; i < 8; i++)
+                    {
+                        stdout.readln();
+                    }
+
+                    string str = strip(stdout.readln(), "\n");
+                    writeln(str);
+                    getBot().channelMessage(str, channel);
+                }
+                // On error
+                else
+                {
+                    File stderr = pipes.stderr();
+
+                    string str = strip(stderr.readln(), "\n");
+                    writeln(str);
+                    getBot().channelMessage(str, channel);
                 }
 
-                string str = strip(stdout.readln(), "\n");
                 
-                writeln(str);
-
-                getBot().channelMessage(str, channel);
             }
             catch(StdioException e)
             {
