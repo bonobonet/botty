@@ -28,15 +28,29 @@ public class EskomCalendarAPI : Mod
 
     public override void react(Message fullMessage, string channel, string messageBody)
     {
-        import std.string : indexOf;
+        import std.stdio;
+        import std.string : indexOf, split, strip;
 
         // Guaranteed to not be -1 as `accepts()` wouldn't have passed then
         long commandIdx = indexOf(messageBody, commandStr);
         string command = messageBody[commandIdx+commandStr.length..$];
 
         // TODO: For this we should rather split the message by `" "`
+        string[] splits = messageBody.split(" ");
+        writeln("Eskom splits: ", splits);
 
-        import std.stdio;
+        // TODO: Send message of error if the `splits` is too small
+        command = strip(splits[1]);
+
+        if(command.length == 0)
+        {
+            getBot().channelMessage("Invalid command for Eskom Calendar", channel);
+        }
+        else
+        {
+
+        }
+       
         writeln("Eskom command: '"~command~"'");
 
         // getBot().channelMessage(funniedText, channel);
