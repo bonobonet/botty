@@ -3,8 +3,6 @@
  */
 module botty.modules.ping;
 
-module botty.modules.deavmicomedy;
-
 import botty.mod;
 import botty.bot : Bot;
 import birchwood.protocol.messages : Message;
