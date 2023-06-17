@@ -4,15 +4,28 @@ import birchwood;
 import lumars;
 import std.conv : to;
 import core.thread : Thread, dur;
+import botty.mod : Mod;
 
 public class Bot : Client
 {
     private string[] channels;
 
+    private Mod[] modules;
+
     this(ConnectionInfo info, string[] channels)
     {
         super(info);
         this.channels = channels;
+
+        // TODO: testing addTestModules
+        addTestModules();
+    }
+
+    // TODO: testing method
+    private void addTestModules()
+    {
+        import botty.modules.deavmicomedy : DeavmiComedy;
+        modules ~= [new DeavmiComedy(this)];
     }
 
     /** 
@@ -38,6 +51,23 @@ public class Bot : Client
         // channelMessage("Yes I received '"~msgBody~"' BOI!", "#general");
         
         reactCommand(fullMessage, channel, msgBody);
+        modulePass(fullMessage, channel, msgBody);
+    }
+
+
+    private void modulePass(Message fullMessage, string channel, string msgBody)
+    {
+        foreach(Mod mod; modules)
+        {
+            /**
+             * Does this module accept the message?
+             * If so, then execute its routine
+             */
+            if(mod.accepts(fullMessage, channel, msgBody))
+            {
+                mod.react(fullMessage, channel, msgBody);
+            }
+        }
     }
 
     public void reactCommand(Message fullMessage, string channel, string msgBody)
