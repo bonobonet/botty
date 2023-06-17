@@ -6,6 +6,8 @@ import birchwood.protocol.messages : Message;
 
 public final class DeavmiComedy : Mod
 {
+    private static string commandStr = ".deavmicomedy";
+
     this(Bot bot)
     {
         super(bot);
@@ -14,22 +16,8 @@ public final class DeavmiComedy : Mod
     public override bool accepts(Message fullMessage, string channel, string messageBody)
     {
         import std.string : startsWith;
-
-        import std.stdio : writeln;
-        writeln("Yesh");
-        
-        if(messageBody.startsWith(".deavmicomedy"))
-        {
-            return true;
-        }
-        else
-        {
-            writeln("YYEYYKKK");
-            return false;
-        }
+        return messageBody.startsWith(commandStr);
     }
-
-    private static string commandStr = ".deavmicomedy";
 
     public override void react(Message fullMessage, string channel, string messageBody)
     {
