@@ -21,9 +21,19 @@ public final class Rot13 : Mod
 
     public override void react(Message fullMessage, string channel, string messageBody)
     {
-        import std.string : split, strip;
-        string[] splits = split(strip(messageBody), " ");
+        import std.string : indexOf, strip;
 
-        // TODO: Implement me @rany2
+        long idx = indexOf(messageBody, commandStr);
+        string toBeSecretified = messageBody[idx+commandStr.length..$];
+
+        getBot().channelMessage(
+            toBeSecretified.map!((ch) {
+                    if (ch >= 'a' && ch <= 'z')
+                        ch = (ch - 'a' + 13) % 26 + 'a';
+                    if (ch >= 'A' && ch <= 'Z')
+                        ch = (ch - 'A' + 13) % 26 + 'A';
+                    return ch.to!char;
+            }), channel
+        );
     }
 }
