@@ -12,5 +12,8 @@
 	"description": "IRC bot for the BonoboNET IRC network",
 	"license": "AGPL-3.0",
 	"name": "botty",
-	"targetType": "executable"
+	"targetType": "executable",
+	"libs": [
+		"curl"
+	]
 }
