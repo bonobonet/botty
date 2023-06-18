@@ -28,11 +28,13 @@ public class Bot : Client
         import botty.modules.eskom : EskomCalendarAPI;
         import botty.modules.ping : Ping;
         import botty.modules.rot13 : Rot13;
+        import botty.modules.translate : Translate;
         modules ~= [
                         new DeavmiComedy(this),
                         new EskomCalendarAPI(this),
                         new Ping(this),
-                        new Rot13(this)
+                        new Rot13(this),
+                        new Translate(this)
                     ];
     }
 
