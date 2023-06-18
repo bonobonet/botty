@@ -7,6 +7,9 @@ import botty.mod;
 import botty.bot : Bot;
 import birchwood.protocol.messages : Message;
 
+import std.json : parseJSON, JSONException, JSONValue;
+import std.net.curl : CurlException;
+
 // TODO: Implement me
 public final class Translate : Mod
 {
@@ -25,9 +28,35 @@ public final class Translate : Mod
 
     public override void react(Message fullMessage, string channel, string messageBody)
     {
-        import std.string : indexOf, strip;
+        import std.string : indexOf, strip, split;
 
-        // TODO: Implement me
+        // TODO: Implement custom language (to) support
+        string[] splits = split(strip(messageBody), " ");
+
+        if(splits.length == 2)
+        {
+            string textToTranslate = splits[1];
+
+            try
+            {
+                string translatedText = translate(textToTranslate);
+                getBot().channelMessage(translatedText, channel);
+            }
+            // On network error
+            catch(CurlException e)
+            {
+                getBot().channelMessage("There was a network error when translating", channel);
+            }
+            // On parsing error
+            catch(JSONException e)
+            {
+                getBot().channelMessage("There was a parsing error when translating", channel);
+            }
+        }
+        else
+        {
+            getBot().channelMessage("Please specify a text to translate", channel);
+        }   
     }
 
     private static string translate(string inputText, string toLang = "en")
@@ -44,9 +73,14 @@ public final class Translate : Mod
         import std.net.curl;
         string data = cast(string)get("https://translate.google.com/translate_a/single?client=gtx&sl=auto&tl="~toLang~"&dt=t&q="~inputText);
 
+        // Parse the result
+        JSONValue[] result = parseJSON(data).array();
+        // writeln(result.toPrettyString());
+
         // FIXME: This needs some cleaning, seems like JSON
-        
-        translatedText = data;
+
+        import std.stdio : writeln;
+        writeln(translatedText = result[0].array()[0].array()[1].str());
 
         return translatedText;
     }
