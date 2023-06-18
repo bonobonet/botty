@@ -35,12 +35,18 @@ public final class Translate : Mod
         // TODO: Implement custom language (to) support
         string[] splits = split(strip(messageBody), " ");
 
-        long textIdx = indexOf(messageBody, " ")+1;
+        long textIdx = indexOf(messageBody, " ");
         
 
         if(textIdx > -1)
         {
-            string textToTranslate = messageBody[textIdx..$];
+            string textToTranslate = strip(messageBody[textIdx+1..$]);
+
+            if(textToTranslate.length == 0)
+            {
+                getBot().channelMessage("No text to translate", channel);
+                return;
+            }
 
             try
             {
