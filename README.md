@@ -22,3 +22,7 @@ Many modules are supported (you can see [here]()) but to name a few we have:
 
 * [rany2](https://github.com/rany2)
     * Implementing the `rot13` module
+
+## License
+
+AGPL 3.0
