@@ -1,13 +1,26 @@
+/** 
+ * Deavmi Comedy module
+ */
 module botty.modules.deavmicomedy;
 
 import botty.mod;
 import botty.bot : Bot;
 import birchwood.protocol.messages : Message;
 
+/** 
+ * Deavmi Comedy command
+ */
 public final class DeavmiComedy : Mod
 {
     private static string commandStr = ".deavmicomedy";
 
+    /** 
+     * Constructs a new `DeavmiComedy` module with the provided
+     * bot to associate with
+     *
+     * Params:
+     *   bot = the `Bot` to associate with
+     */
     this(Bot bot)
     {
         super(bot);
