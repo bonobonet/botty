@@ -60,7 +60,7 @@ public final class Rot13 : Mod
                         ch = (ch - 'a' + 13) % 26 + 'a';
                     if (ch >= 'A' && ch <= 'Z')
                         ch = (ch - 'A' + 13) % 26 + 'A';
-                    return ch.to!char;
+                    return ch.to!wchar;
             }));
     }
 }
