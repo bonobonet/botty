@@ -32,11 +32,18 @@ public final class Translate : Mod
     {
         import std.string : indexOf, strip, split;
 
-        // TODO: Implement custom language (to) support
+    
         string[] splits = split(strip(messageBody), " ");
-
         long textIdx = indexOf(messageBody, " ");
-        
+    
+
+        // Check for `.tr:<lang>`
+        string toLang = "en";
+        long toLangIdx = splits[0].indexOf(":");
+        if(toLangIdx > -1)
+        {
+            toLang = splits[0].split(":")[1];
+        }
 
         if(textIdx > -1)
         {
@@ -50,7 +57,7 @@ public final class Translate : Mod
 
             try
             {
-                string translatedText = translate(textToTranslate);
+                string translatedText = translate(textToTranslate, toLang);
                 getBot().channelMessage(translatedText, channel);
             }
             // On network error
