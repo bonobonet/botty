@@ -7,10 +7,20 @@ import botty.mod;
 import botty.bot : Bot;
 import birchwood.protocol.messages : Message;
 
+/** 
+ * Ping command
+ */
 public final class Ping : Mod
 {
     private static string commandStr = ".ping";
 
+    /** 
+     * Constructs a new `Ping` module with the provided
+     * bot to associate with
+     *
+     * Params:
+     *   bot = the `Bot` to associate with
+     */
     this(Bot bot)
     {
         super(bot);
