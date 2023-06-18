@@ -14,6 +14,13 @@ public final class Rot13 : Mod
 {
     private static string commandStr = ".rot13";
 
+    /** 
+     * Constructs a new `Rot13` module with the provided
+     * bot to associate with
+     *
+     * Params:
+     *   bot = the `Bot` to associate with
+     */
     this(Bot bot)
     {
         super(bot);
