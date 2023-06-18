@@ -10,7 +10,9 @@ import birchwood.protocol.messages : Message;
 import std.json : parseJSON, JSONException, JSONValue;
 import std.net.curl : CurlException;
 
-// TODO: Implement me
+/**
+ * Translation module
+ */
 public final class Translate : Mod
 {
     private static string commandStr = ".tr";
@@ -62,6 +64,13 @@ public final class Translate : Mod
         }   
     }
 
+    /** 
+     * Translates the provided text into the given language (default `"en"` for English)
+     *
+     * Params:
+     *   inputText = the text to translate
+     * Returns: the translated text
+     */
     private static string translate(string inputText, string toLang = "en")
     {
         string translatedText;
