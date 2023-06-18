@@ -11,11 +11,21 @@ import botty.bot : Bot;
 import birchwood.protocol.messages : Message;
 import eskomcalendar;
 
+/** 
+ * Eskom Calendar command
+ */
 public final class EskomCalendarAPI : Mod
 {
     private static string commandStr = ".eskom";
     private EskomCalendar calendar;
 
+    /** 
+     * Constructs a new `EskomCalendarAPI` module with the provided
+     * bot to associate with
+     *
+     * Params:
+     *   bot = the `Bot` to associate with
+     */
     this(Bot bot)
     {
         super(bot);
