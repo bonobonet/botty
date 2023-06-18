@@ -33,9 +33,12 @@ public final class Translate : Mod
         // TODO: Implement custom language (to) support
         string[] splits = split(strip(messageBody), " ");
 
-        if(splits.length == 2)
+        long textIdx = indexOf(messageBody, " ")+1;
+        
+
+        if(textIdx > -1)
         {
-            string textToTranslate = splits[1];
+            string textToTranslate = messageBody[textIdx..$];
 
             try
             {
@@ -75,12 +78,14 @@ public final class Translate : Mod
 
         // Parse the result
         JSONValue[] result = parseJSON(data).array();
-        // writeln(result.toPrettyString());
+
+        import std.stdio : writeln;
+        writeln(result);
 
         // FIXME: This needs some cleaning, seems like JSON
 
-        import std.stdio : writeln;
-        writeln(translatedText = result[0].array()[0].array()[1].str());
+        
+        writeln(translatedText = result[0].array()[0].array()[0].str());
 
         return translatedText;
     }
