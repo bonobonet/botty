@@ -5,17 +5,17 @@ import lumars;
 import std.conv : to;
 import core.thread : Thread, dur;
 import botty.mod : Mod;
-
+import botty.config : Config;
 public class Bot : Client
 {
-    private string[] channels;
+    private Config config;
 
     private Mod[] modules;
 
-    this(ConnectionInfo info, string[] channels)
+    this(ConnectionInfo info, Config config)
     {
         super(info);
-        this.channels = channels;
+        this.config = config;
 
         // TODO: testing addTestModules
         addTestModules();
@@ -51,7 +51,7 @@ public class Bot : Client
         Thread.sleep(dur!("seconds")(2));
 
         // Join channels requested
-        joinChannel(channels);
+        joinChannel(config.channels);
     }
 
     public override void onChannelMessage(Message fullMessage, string channel, string msgBody)

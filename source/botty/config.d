@@ -21,9 +21,9 @@ public struct Config
 	string nickname;
 
 	/** 
-	 * Channels to join (in CSV format (for now))
+	 * Channels to join
 	 */
-	string channels;
+	string[] channels;
 }
 
 public Config getConfig(string configPath)

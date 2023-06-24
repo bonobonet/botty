@@ -37,11 +37,9 @@ void main(string[] args)
 
 	// // Set the fakelag to 1 second
 	// connInfo.setFakeLag(1);
-	
-	// Extract the channels to connect to
-	string[] channels = split(config.channels, ",");
 
-	Bot botty = new Bot(connInfo, channels);
+
+	Bot botty = new Bot(connInfo, config);
 
 	// Start the bot
 	botty.start();
