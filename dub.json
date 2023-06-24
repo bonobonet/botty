@@ -6,7 +6,7 @@
 	"dependencies": {
 		"birchwood": ">=2.0.1-beta.1",
 		"eskomcalendar4d": ">=0.1.3",
-		"jstruct": ">=0.1.3",
+		"jstruct": ">=0.2.11",
 		"lumars": ">=1.11.0"
 	},
 	"description": "IRC bot for the BonoboNET IRC network",
