@@ -7,13 +7,14 @@
 		"birchwood": ">=2.4.0-beta",
 		"eskomcalendar4d": ">=0.1.3",
 		"jstruct": ">=0.2.11",
-		"lumars": ">=1.11.0"
+		"lumars": ">=1.11.0",
+		"vibe-d": "~>0.9.6"
 	},
 	"description": "IRC bot for the BonoboNET IRC network",
-	"license": "AGPL-3.0",
-	"name": "botty",
-	"targetType": "executable",
 	"libs": [
 		"curl"
-	]
+	],
+	"license": "AGPL-3.0",
+	"name": "botty",
+	"targetType": "executable"
 }
