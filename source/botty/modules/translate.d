@@ -106,6 +106,8 @@ public final class Translate : Mod
 
         // FIXME: This needs some cleaning, seems like JSON
 
+        // TODO: Add http connection session thing help rany pls
+
         
         writeln(translatedText = result[0].array()[0].array()[0].str());
 
