@@ -4,7 +4,7 @@
 	],
 	"copyright": "Copyright © 2023, Tristan B. Kildaire",
 	"dependencies": {
-		"birchwood": ">=2.0.1-beta.1",
+		"birchwood": ">=2.4.0-beta",
 		"eskomcalendar4d": ">=0.1.3",
 		"jstruct": ">=0.2.11",
 		"lumars": ">=1.11.0"
