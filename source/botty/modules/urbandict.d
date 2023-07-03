@@ -6,6 +6,7 @@ module botty.modules.urbandict;
 import botty.mod;
 import botty.bot : Bot;
 import birchwood.protocol.messages : Message;
+import std.net.curl : CurlException;
 
 /** 
  * Urban dictionary command
@@ -48,17 +49,34 @@ public final class UrbanDict : Mod
          * Split the ` .ub   dictionarydef`
          * into two parts `[.ub, dictionarydef]`
          */
-        string[] splits = split(strip(messageBody), " ");
+        messageBody = strip(messageBody);
+        string[] splits = split(messageBody, " ");
         writeln("splits", splits);
 
         if(splits.length >= 2)
         {
-            string searchTerm = splits[1];
-            getBot().channelMessage("hehe", channel);
+    
+            string searchTerm = strip(messageBody[messageBody.indexOf(" ")..$]);
+
+            getBot().channelMessage("hehe", searchTerm);
         }
         else
         {
             // Do nothing
         }
+    }
+
+    private static void doThing(string term)
+    {
+        import std.string : fromStringz;
+        import etc.c.curl : curl_escape;
+        term = cast(string)fromStringz(curl_escape(cast(const(char)*)term.ptr, cast(int)term.length));
+
+        // Do the request
+        import std.net.curl;
+        string data = cast(string)get(ubBase~term);
+        
+        import std.stdio;
+        writeln("UB result: ", data);
     }
 }
