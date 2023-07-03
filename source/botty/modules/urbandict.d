@@ -82,11 +82,10 @@ public final class UrbanDict : Mod
                     getBot().channelMessage(bold("Author: ")~author, channel);
                     getBot().channelMessage(bold("Permalink: ")~permalink, channel);
                 }
+                // If no definitions are found
                 else
                 {
-                    // TODO: Handl eno defintions
-                    // TODO: Send result below
-                    // getBot().channelMessage(translatedText, channel);
+                    getBot().channelMessage("No definitions for '"~searchTerm~"'", channel);
                 }              
             }
             // On network error
@@ -99,10 +98,6 @@ public final class UrbanDict : Mod
             {
                 getBot().channelMessage("There was a parsing error when looking up on urban dictionary", channel);
             }
-
-
-
-            getBot().channelMessage("hehe", channel);
         }
         else
         {
