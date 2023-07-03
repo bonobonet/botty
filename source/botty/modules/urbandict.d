@@ -56,7 +56,9 @@ public final class UrbanDict : Mod
 
         if(splits.length >= 2)
         {
+            writeln("Are we ongod yet? ",messageBody.indexOf(" "));
             string searchTerm = strip(messageBody[messageBody.indexOf(" ")..$]);
+            writeln("search term: '"~searchTerm~"'");
 
             try
             {
@@ -76,6 +78,12 @@ public final class UrbanDict : Mod
                     string permalink = firstDef["permalink"].str();
 
                     import birchwood.protocol.formatting;
+
+                    writeln("Def '"~definition~"'");
+                    writeln("Ex '"~example~"'");
+                    writeln("Au '"~definition~"'");
+                    writeln("Perm '"~permalink~"'");
+
 
                     getBot().channelMessage(bold("Definition: ")~definition, channel);
                     getBot().channelMessage(bold("Example: ")~example, channel);
@@ -102,6 +110,14 @@ public final class UrbanDict : Mod
         else
         {
             // Do nothing
+            writeln("IMM   A  W ");
+            writeln("IMM   A  W ");
+            writeln("IMM   A  W ");
+            writeln("IMM   A  W ");
+            writeln("IMM   A  W ");
+            writeln("IMM   A  W ");
+            writeln("IMM   A  W ");
+            writeln("IMM   A  W ");
         }
     }
 
@@ -116,9 +132,10 @@ public final class UrbanDict : Mod
         
         
         import std.stdio;
-        // writeln("UB result: ", data);
+        
 
         string data = cast(string)get(ubBase~term);
+        writeln("UB result: ", data);
         JSONValue[] json = parseJSON(data)["list"].array();
 
         return json;
