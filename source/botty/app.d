@@ -36,7 +36,7 @@ void main(string[] args)
 	ConnectionInfo connInfo = ConnectionInfo.newConnection(config.serverAddr, cast(ushort)config.serverPort, "bottyng", "doggie", "Tristan B. Kildaire");
 
 	// // Set the fakelag to 1 second
-	// connInfo.setFakeLag(1);
+	connInfo.setFakeLag(0);
 
 
 	Bot botty = new Bot(connInfo, config);
