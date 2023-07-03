@@ -46,6 +46,7 @@ public final class UrbanDict : Mod
 
         import std.stdio;
         import std.string : split;
+        import std.conv : to, ConvException;
 
         /**
          * Split the ` .ub   dictionarydef`
@@ -55,10 +56,34 @@ public final class UrbanDict : Mod
         string[] splits = split(messageBody, " ");
         writeln("splits", splits);
 
+        
+
         try
         {
+            
+            
             if(splits.length >= 2)
             {
+
+                /** 
+                 * Checks for `.ub:2`
+                 */
+                ulong count = 0;
+                long countIdx = splits[0].indexOf(":");
+                if(countIdx > -1)
+                {
+                    string countStr = splits[0].split(":")[1];
+                    try
+                    {
+                        count = to!(ulong)(countStr);
+                    }
+                    catch(ConvException e)
+                    {
+                        getBot().channelMessage("Invalid index '"~countStr~"'", channel);
+                    }
+                }
+
+
                 writeln("Are we ongod yet? ",messageBody.indexOf(" "));
                 string searchTerm = strip(messageBody[messageBody.indexOf(" ")..$]);
                 writeln("search term: '"~searchTerm~"'");
@@ -67,13 +92,15 @@ public final class UrbanDict : Mod
                 {
                     // Perform lookup and parsing
                     JSONValue[] definitions = doThing(searchTerm);
+                    writeln("Definitions count: ", definitions.length);
+                    writeln("Selecting definition: ", count);
 
                     if(definitions.length > 0)
                     {
                         // TODO: Send result below
                         // getBot().channelMessage(translatedText, channel);
 
-                        JSONValue firstDef = definitions[0];
+                        JSONValue firstDef = definitions[count];
 
                         string definition = firstDef["definition"].str();
                         string example = firstDef["example"].str();
