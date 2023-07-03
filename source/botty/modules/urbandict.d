@@ -61,10 +61,33 @@ public final class UrbanDict : Mod
             try
             {
                 // Perform lookup and parsing
-                JSONValue json = doThing(searchTerm);
+                JSONValue[] definitions = doThing(searchTerm);
 
-                // TODO: Send result below
-                // getBot().channelMessage(translatedText, channel);
+                if(definitions.length >= 0)
+                {
+                    // TODO: Send result below
+                    // getBot().channelMessage(translatedText, channel);
+
+                    JSONValue firstDef = definitions[0];
+
+                    string definition = firstDef["definition"].str();
+                    string example = firstDef["example"].str();
+                    string author = firstDef["author"].str();
+                    string permalink = firstDef["permalink"].str();
+
+                    import birchwood.protocol.formatting;
+
+                    getBot().channelMessage(bold("Definition: ")~definition, channel);
+                    getBot().channelMessage(bold("Example: ")~example, channel);
+                    getBot().channelMessage(bold("Author: ")~author, channel);
+                    getBot().channelMessage(bold("Permalink: ")~permalink, channel);
+                }
+                else
+                {
+                    // TODO: Handl eno defintions
+                    // TODO: Send result below
+                    // getBot().channelMessage(translatedText, channel);
+                }              
             }
             // On network error
             catch(CurlException e)
@@ -87,7 +110,7 @@ public final class UrbanDict : Mod
         }
     }
 
-    private static JSONValue doThing(string term)
+    private static JSONValue[] doThing(string term)
     {
         import std.string : fromStringz;
         import etc.c.curl : curl_escape;
@@ -101,10 +124,8 @@ public final class UrbanDict : Mod
         // writeln("UB result: ", data);
 
         string data = cast(string)get(ubBase~term);
-        JSONValue json = parseJSON(data);
+        JSONValue[] json = parseJSON(data)["list"].array();
 
         return json;
-
-        
     }
 }
