@@ -33,7 +33,7 @@ void main(string[] args)
 	}
 
 	// TODO: Extract config info here and set it in the `connInfo` below
-	ConnectionInfo connInfo = ConnectionInfo.newConnection("worcester.community.networks.deavmi.assigned.network", 6667, "bottyng", "doggie", "Tristan B. Kildaire");
+	ConnectionInfo connInfo = ConnectionInfo.newConnection(config.serverAddr, config.serverPort, "bottyng", "doggie", "Tristan B. Kildaire");
 
 	// // Set the fakelag to 1 second
 	// connInfo.setFakeLag(1);
