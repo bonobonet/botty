@@ -55,10 +55,13 @@ public final class UrbanDict : Mod
 
         if(splits.length >= 2)
         {
-    
             string searchTerm = strip(messageBody[messageBody.indexOf(" ")..$]);
 
-            getBot().channelMessage("hehe", searchTerm);
+            doThing(searchTerm);
+
+
+
+            getBot().channelMessage("hehe", channel);
         }
         else
         {
@@ -74,9 +77,30 @@ public final class UrbanDict : Mod
 
         // Do the request
         import std.net.curl;
-        string data = cast(string)get(ubBase~term);
+        
         
         import std.stdio;
-        writeln("UB result: ", data);
+        // writeln("UB result: ", data);
+
+        
+
+        try
+        {
+            string data = cast(string)get(ubBase~term);
+            JSONValue json = parseJSON(data);
+            
+            // TODO: Send result below
+            // getBot().channelMessage(translatedText, channel);
+        }
+        // On network error
+        catch(CurlException e)
+        {
+            getBot().channelMessage("There was a network error when looking up on urban dictionary", channel);
+        }
+        // On parsing error
+        catch(JSONException e)
+        {
+            getBot().channelMessage("There was a parsing error when looking up on urban dictionary", channel);
+        }
     }
 }
