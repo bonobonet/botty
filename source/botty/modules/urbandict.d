@@ -69,7 +69,7 @@ public final class UrbanDict : Mod
         }
     }
 
-    private static void doThing(string term)
+    private void doThing(string term)
     {
         import std.string : fromStringz;
         import etc.c.curl : curl_escape;
