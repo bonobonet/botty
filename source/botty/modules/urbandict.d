@@ -8,6 +8,7 @@ import botty.bot : Bot;
 import birchwood.protocol.messages : Message;
 import std.net.curl : CurlException;
 import std.json : JSONValue, JSONException, parseJSON;
+import birchwood;
 
 /** 
  * Urban dictionary command
@@ -54,70 +55,77 @@ public final class UrbanDict : Mod
         string[] splits = split(messageBody, " ");
         writeln("splits", splits);
 
-        if(splits.length >= 2)
+        try
         {
-            writeln("Are we ongod yet? ",messageBody.indexOf(" "));
-            string searchTerm = strip(messageBody[messageBody.indexOf(" ")..$]);
-            writeln("search term: '"~searchTerm~"'");
-
-            try
+            if(splits.length >= 2)
             {
-                // Perform lookup and parsing
-                JSONValue[] definitions = doThing(searchTerm);
+                writeln("Are we ongod yet? ",messageBody.indexOf(" "));
+                string searchTerm = strip(messageBody[messageBody.indexOf(" ")..$]);
+                writeln("search term: '"~searchTerm~"'");
 
-                if(definitions.length > 0)
+                try
                 {
-                    // TODO: Send result below
-                    // getBot().channelMessage(translatedText, channel);
+                    // Perform lookup and parsing
+                    JSONValue[] definitions = doThing(searchTerm);
 
-                    JSONValue firstDef = definitions[0];
+                    if(definitions.length > 0)
+                    {
+                        // TODO: Send result below
+                        // getBot().channelMessage(translatedText, channel);
 
-                    string definition = firstDef["definition"].str();
-                    string example = firstDef["example"].str();
-                    string author = firstDef["author"].str();
-                    string permalink = firstDef["permalink"].str();
+                        JSONValue firstDef = definitions[0];
 
-                    import birchwood.protocol.formatting;
+                        string definition = firstDef["definition"].str();
+                        string example = firstDef["example"].str();
+                        string author = firstDef["author"].str();
+                        string permalink = firstDef["permalink"].str();
 
-                    writeln("Def '"~definition~"'");
-                    writeln("Ex '"~example~"'");
-                    writeln("Au '"~definition~"'");
-                    writeln("Perm '"~permalink~"'");
+                        import birchwood.protocol.formatting;
+
+                        writeln("Def '"~definition~"'");
+                        writeln("Ex '"~example~"'");
+                        writeln("Au '"~definition~"'");
+                        writeln("Perm '"~permalink~"'");
 
 
-                    getBot().channelMessage(bold("Definition: ")~definition, channel);
-                    getBot().channelMessage(bold("Example: ")~example, channel);
-                    getBot().channelMessage(bold("Author: ")~author, channel);
-                    getBot().channelMessage(bold("Permalink: ")~permalink, channel);
+                        getBot().channelMessage(bold("Definition: ")~definition, channel);
+                        getBot().channelMessage(bold("Example: ")~example, channel);
+                        getBot().channelMessage(bold("Author: ")~author, channel);
+                        getBot().channelMessage(bold("Permalink: ")~permalink, channel);
+                    }
+                    // If no definitions are found
+                    else
+                    {
+                        getBot().channelMessage("No definitions for '"~searchTerm~"'", channel);
+                    }              
                 }
-                // If no definitions are found
-                else
+                // On network error
+                catch(CurlException e)
                 {
-                    getBot().channelMessage("No definitions for '"~searchTerm~"'", channel);
-                }              
+                    getBot().channelMessage("There was a network error when looking up on urban dictionary", channel);
+                }
+                // On parsing error
+                catch(JSONException e)
+                {
+                    getBot().channelMessage("There was a parsing error when looking up on urban dictionary", channel);
+                }
             }
-            // On network error
-            catch(CurlException e)
+            else
             {
-                getBot().channelMessage("There was a network error when looking up on urban dictionary", channel);
-            }
-            // On parsing error
-            catch(JSONException e)
-            {
-                getBot().channelMessage("There was a parsing error when looking up on urban dictionary", channel);
+                // Do nothing
+                writeln("IMM   A  W ");
+                writeln("IMM   A  W ");
+                writeln("IMM   A  W ");
+                writeln("IMM   A  W ");
+                writeln("IMM   A  W ");
+                writeln("IMM   A  W ");
+                writeln("IMM   A  W ");
+                writeln("IMM   A  W ");
             }
         }
-        else
+        catch(BirchwoodException e)
         {
-            // Do nothing
-            writeln("IMM   A  W ");
-            writeln("IMM   A  W ");
-            writeln("IMM   A  W ");
-            writeln("IMM   A  W ");
-            writeln("IMM   A  W ");
-            writeln("IMM   A  W ");
-            writeln("IMM   A  W ");
-            writeln("IMM   A  W ");
+            writeln("Birchwood error: ", e);
         }
     }
 
