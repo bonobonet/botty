@@ -17,6 +17,9 @@ Many modules are supported (you can see [here]()) but to name a few we have:
     * You can do Rot13 using `.rot13 <Text>`
 3. Ping
     * Let's you ping a endpoint with `.ping <addr/domain>`
+4. Urban dictionary
+    * Let's you ookup definitions on Urban dictionary
+    * Using `.ub Marshmellow`
 
 ## Credits
 
