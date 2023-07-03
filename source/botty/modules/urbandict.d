@@ -7,6 +7,7 @@ import botty.mod;
 import botty.bot : Bot;
 import birchwood.protocol.messages : Message;
 import std.net.curl : CurlException;
+import std.json : JSONValue, JSONException, parseJSON;
 
 /** 
  * Urban dictionary command
@@ -57,7 +58,24 @@ public final class UrbanDict : Mod
         {
             string searchTerm = strip(messageBody[messageBody.indexOf(" ")..$]);
 
-            doThing(searchTerm);
+            try
+            {
+                // Perform lookup and parsing
+                JSONValue json = doThing(searchTerm);
+
+                // TODO: Send result below
+                // getBot().channelMessage(translatedText, channel);
+            }
+            // On network error
+            catch(CurlException e)
+            {
+                getBot().channelMessage("There was a network error when looking up on urban dictionary", channel);
+            }
+            // On parsing error
+            catch(JSONException e)
+            {
+                getBot().channelMessage("There was a parsing error when looking up on urban dictionary", channel);
+            }
 
 
 
@@ -69,7 +87,7 @@ public final class UrbanDict : Mod
         }
     }
 
-    private void doThing(string term)
+    private static JSONValue doThing(string term)
     {
         import std.string : fromStringz;
         import etc.c.curl : curl_escape;
@@ -82,25 +100,11 @@ public final class UrbanDict : Mod
         import std.stdio;
         // writeln("UB result: ", data);
 
-        
+        string data = cast(string)get(ubBase~term);
+        JSONValue json = parseJSON(data);
 
-        try
-        {
-            string data = cast(string)get(ubBase~term);
-            JSONValue json = parseJSON(data);
-            
-            // TODO: Send result below
-            // getBot().channelMessage(translatedText, channel);
-        }
-        // On network error
-        catch(CurlException e)
-        {
-            getBot().channelMessage("There was a network error when looking up on urban dictionary", channel);
-        }
-        // On parsing error
-        catch(JSONException e)
-        {
-            getBot().channelMessage("There was a parsing error when looking up on urban dictionary", channel);
-        }
+        return json;
+
+        
     }
 }
