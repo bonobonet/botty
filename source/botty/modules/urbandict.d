@@ -65,7 +65,7 @@ public final class UrbanDict : Mod
                 // Perform lookup and parsing
                 JSONValue[] definitions = doThing(searchTerm);
 
-                if(definitions.length >= 0)
+                if(definitions.length > 0)
                 {
                     // TODO: Send result below
                     // getBot().channelMessage(translatedText, channel);
